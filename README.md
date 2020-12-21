@@ -4,8 +4,12 @@ I wanted to have fun while exploring the composition api so used the classic exe
 Fun features include the fact that the game is always fullscreen and adjusts to the width and height of the browser by becoming more compact. Try resizing while playing.
 
 Stuff I could still do:
-figure out how to eject (or most likely write an app for ejecting) webpack config
-after that I could write a visualizer for the code and reference tree contained in chunks again, would be fun
+- figure out how to eject (or most likely write an app for ejecting) webpack config (could be done based on the dynamic webpack config stored by the cli)
+- write a backend app that can based on user-agent detect browser version and serve a custom build for the specific browser without including polyfills for others
+- - and configure webpack to build for different target browsers
+- - and a fallback script to return that just prints "your browser is unsupported, please try these:" or "your browser version is old, please update to at least Y" 
+- after that I could write a visualizer for the code and reference tree contained in chunks again, would be fun
+
 
 Interesting stuff to remember:
 the following json enables autofixing of linting issues when added to `settings.json` of VSCode:
