@@ -1,31 +1,35 @@
 export type Position = { xPos: number; yPos: number }
 export type Direction = 'left' | 'right' | 'up' | 'down';
 
+export type SnakeFragment = {
+  color: string;
+} & Position;
+
 export type Game = {
-  snakeFragmentPositions: ({
-      color: string;
-  } & Position)[];
+  snakeFragmentPositions: SnakeFragment[];
   currentDirection: Direction;
   nextDirection: Direction;
+  nextMoveSpeed: number;
 
   foodPosition: {
-      xPos: number;
-      yPos: number;
-      color: string;
+    xPos: number;
+    yPos: number;
+    color: string;
   };
 };
 
 export type Boundaries = {
-    minXPos: number;
-    maxXPos: number;
-    minYPos: number;
-    maxYPos: number;
+  minXPos: number;
+  maxXPos: number;
+  minYPos: number;
+  maxYPos: number;
 }
 
 export function calculateNextPos (
   nextDirection: Direction,
   previousPos: Position,
-  boundaries: Boundaries
+  boundaries: Boundaries,
+  posIncrease: number
 ): Position {
   const newPos = {
     xPos: previousPos.xPos,
@@ -33,13 +37,13 @@ export function calculateNextPos (
   };
 
   if (nextDirection === 'left') {
-    newPos.xPos = previousPos.xPos - 1;
+    newPos.xPos = previousPos.xPos - posIncrease;
   } else if (nextDirection === 'right') {
-    newPos.xPos = previousPos.xPos + 1;
+    newPos.xPos = previousPos.xPos + posIncrease;
   } else if (nextDirection === 'down') {
-    newPos.yPos = previousPos.yPos + 1;
+    newPos.yPos = previousPos.yPos + posIncrease;
   } else if (nextDirection === 'up') {
-    newPos.yPos = previousPos.yPos - 1;
+    newPos.yPos = previousPos.yPos - posIncrease;
   }
 
   if (newPos.xPos < boundaries.minXPos) {
@@ -57,23 +61,21 @@ export function calculateNextPos (
   return newPos;
 };
 
+const oppositeDirections: { [direction in Direction]: Direction } = {
+  left: 'right',
+  right: 'left',
+  up: 'down',
+  down: 'up'
+};
+
 export function directionsAreOpposite (
   inputtedDirection: Direction,
   currentDirection: Direction
 ): boolean {
-  // todo figure out fancier solution
-  if (inputtedDirection === 'left' && currentDirection === 'right') {
+  if (inputtedDirection === oppositeDirections[currentDirection]) {
     return true;
   }
-  if (inputtedDirection === 'right' && currentDirection === 'left') {
-    return true;
-  }
-  if (inputtedDirection === 'up' && currentDirection === 'down') {
-    return true;
-  }
-  if (inputtedDirection === 'down' && currentDirection === 'up') {
-    return true;
-  }
+
   return false;
 }
 
@@ -85,7 +87,7 @@ export function randomFood (payload: { maxXPos: number; maxYPos: number }): {
   return {
     xPos: Math.floor(Math.random() * payload.maxXPos),
     yPos: Math.floor(Math.random() * payload.maxYPos),
-    color: 'black'
+    color: 'red'
   };
 }
 
@@ -95,14 +97,15 @@ export function updatePositions (
   restartGame: () => void
 ): void {
   const oldHeadPos = game.snakeFragmentPositions[game.snakeFragmentPositions.length - 1];
-  const newHeadPos = calculateNextPos(game.nextDirection, oldHeadPos, boundaries);
+  const newHeadPos = calculateNextPos(game.nextDirection, oldHeadPos, boundaries, game.nextMoveSpeed);
+
   if (newHeadPos.xPos === game.foodPosition.xPos &&
-      newHeadPos.yPos === game.foodPosition.yPos) {
+    newHeadPos.yPos === game.foodPosition.yPos) {
     game.foodPosition = randomFood(boundaries);
   } else {
     const crash = game.snakeFragmentPositions.some(fragmentPos =>
       fragmentPos.xPos === newHeadPos.xPos &&
-        fragmentPos.yPos === newHeadPos.yPos);
+      fragmentPos.yPos === newHeadPos.yPos);
     if (crash) {
       restartGame();
       return;
@@ -112,7 +115,7 @@ export function updatePositions (
 
   game.snakeFragmentPositions.push({
     ...newHeadPos,
-    color: 'red'
+    color: oldHeadPos.color
   });
 
   game.currentDirection = game.nextDirection;

@@ -9,6 +9,11 @@ Stuff I could still do:
 - - and configure webpack to build for different target browsers
 - - and a fallback script to return that just prints "your browser is unsupported, please try these:" or "your browser version is old, please update to at least Y" 
 - after that I could write a visualizer for the code and reference tree contained in chunks again, would be fun
+- styling
+- - display score in the head of the snake
+- - make corners of the snake rounded (make screen black)
+- - increase speed/area of play by collecting points
+- - add quick speed via hold down
 
 
 Interesting stuff to remember:

@@ -20,8 +20,7 @@ export default defineComponent({
         top: this.yPosInPx,
         width: this.widthInPx,
         height: this.heightInPx,
-        // 'background-color': this.color,
-        border: '2px dashed ' + this.color
+        backgroundColor: this.color
       }}
     ></div>;
   }

@@ -1,32 +1,26 @@
 
-import { Boundaries, Direction, directionsAreOpposite, Game, randomFood, updatePositions } from '@/game-logic';
+import { directionsAreOpposite, Game, randomFood, updatePositions } from '@/game-logic';
 import { calculateModifierX, calculateModifierY, mapEventKeyToDirection, mapFragmentTo } from '@/screen-logic';
-import { defineComponent, onMounted, reactive, computed } from 'vue';
+import { defineComponent, onMounted, reactive, computed, onUnmounted } from 'vue';
 
 import SnakeFragment from '@/components/SnakeFragment';
+import { eventManager, Unsubscribe } from '@/event-manager';
+import { initialBoundaries, initialDirection, initialSnake } from '@/defaults';
 
 export default defineComponent({
   name: 'Snake',
 
   setup () {
-    const initialDirection: Direction = 'right';
-    const boundaries: Boundaries = {
-      minXPos: 0,
-      maxXPos: 19,
-      minYPos: 0,
-      maxYPos: 19,
+    const boundaries = {
+      ...initialBoundaries
     };
 
     const buildGame = (): Game => {
       return {
-        snakeFragmentPositions: [
-          { xPos: 0, yPos: 0, color: 'red' },
-          { xPos: 1, yPos: 0, color: 'red' },
-          { xPos: 2, yPos: 0, color: 'red' },
-          { xPos: 3, yPos: 0, color: 'red' },
-        ],
+        snakeFragmentPositions: initialSnake(),
         currentDirection: initialDirection,
         nextDirection: initialDirection,
+        nextMoveSpeed: 1,
         foodPosition: randomFood(boundaries),
       };
     };
@@ -40,23 +34,40 @@ export default defineComponent({
     });
 
     const exposedState = {
-      snakeFragments: computed(() => state.game.snakeFragmentPositions.map(fragment => mapFragmentTo(fragment, state.modifiers))),
-      foodFragment: computed(() => mapFragmentTo(state.game.foodPosition, state.modifiers))
+      snakeFragments: computed(() => state.game.snakeFragmentPositions.map(
+        fragment => {
+          const snakeViewFragment = mapFragmentTo({
+            fragment: fragment,
+            modifiers: state.modifiers
+          });
+          return snakeViewFragment;
+        })),
+
+      foodFragment: computed(() => mapFragmentTo({
+        fragment: state.game.foodPosition,
+        modifiers: state.modifiers
+      }))
     };
 
+    const eventSubscribers: Unsubscribe[] = [];
+
+    onUnmounted(() => {
+      eventSubscribers.forEach(unsubscriber => unsubscriber());
+    });
+
     onMounted(() => {
-      window.addEventListener('resize', () => {
+      eventSubscribers.push(eventManager.onWindowResize(() => {
         state.modifiers.pxModifierX = calculateModifierX(window.innerWidth, boundaries);
         state.modifiers.pxModifierY = calculateModifierY(window.innerHeight, boundaries);
-      });
+      }));
 
-      window.setInterval(() => {
+      eventSubscribers.push(eventManager.onInterval(() => {
         updatePositions(state.game, boundaries, () => {
           state.game = reactive(buildGame());
         });
-      }, 600);
+      }, 600));
 
-      document.addEventListener('keydown', evt => {
+      eventSubscribers.push(eventManager.onKeyDown((evt) => {
         const inputtedDirection = mapEventKeyToDirection(evt.key);
 
         if (inputtedDirection === null) {
@@ -68,7 +79,25 @@ export default defineComponent({
         }
 
         state.game.nextDirection = inputtedDirection;
-      });
+      }));
+
+      eventSubscribers.push(eventManager.onKeyHeldDown({
+        heldDownStart: (evt) => {
+          console.log('heldDownStart', evt.key);
+          const inputtedDirection = mapEventKeyToDirection(evt.key);
+          if (state.game.nextDirection === inputtedDirection) {
+            state.game.nextMoveSpeed = 2;
+          }
+        },
+        heldDownEnd: (evt) => {
+          console.log('heldDownEnd', evt.key);
+          const inputtedDirection = mapEventKeyToDirection(evt.key);
+          if (state.game.nextDirection === inputtedDirection) {
+            state.game.nextMoveSpeed = 1;
+          }
+        },
+        keyHeldDownInterval: 200,
+      }));
     });
 
     return exposedState;

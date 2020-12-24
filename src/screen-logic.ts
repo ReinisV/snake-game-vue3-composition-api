@@ -1,4 +1,4 @@
-import { Direction } from './game-logic';
+import { Direction, SnakeFragment } from './game-logic';
 
 export function mapEventKeyToDirection (eventKey: string): Direction | null {
   if (eventKey === 'ArrowLeft') {
@@ -30,19 +30,21 @@ export function calculateModifierX (
   return windowInnerWidth / (boundaries.maxXPos - boundaries.minXPos);
 }
 
-export function mapFragmentTo (
-  fragment: { xPos: number; yPos: number; color: string },
+export function mapFragmentTo (payload: {
+  fragment: SnakeFragment;
   modifiers: {
     pxModifierX: number;
     pxModifierY: number;
-  }
-): {
+  };
+}): {
   xPosInPx: string;
   yPosInPx: string;
   widthInPx: string;
   heightInPx: string;
   color: string;
 } {
+  const { fragment, modifiers } = payload;
+
   return {
     xPosInPx: fragment.xPos * modifiers.pxModifierX + 'px',
     yPosInPx: fragment.yPos * modifiers.pxModifierY + 'px',
