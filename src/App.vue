@@ -13,7 +13,7 @@ import router from './router';
 
 export default defineComponent({
   name: 'App',
-  setup () {
+  setup() {
     router.afterEach((to, from) => {
       if (to.name === 'Snake') {
         document.body.style.backgroundColor = 'black';
