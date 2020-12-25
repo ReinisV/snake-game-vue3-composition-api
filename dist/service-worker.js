@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/snake-game-vue3-composition-api/precache-manifest.73777f824386300f57a77a64c32c1b54.js"
+  "/snake-game-vue3-composition-api/dist/precache-manifest.22fd3be01ec7f31333131aa055142723.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "hello-vue3"});
