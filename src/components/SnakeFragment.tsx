@@ -17,7 +17,7 @@ export default defineComponent({
   // todo maybe something like
   // render (this: this as this & {prevDirection: Direction})
   // for TS typesafety
-  render () {
+  render() {
     const styleObject = {
       position: 'absolute',
       left: this.xPosInPx,

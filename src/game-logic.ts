@@ -1,4 +1,5 @@
 import { forEachButBetter } from './array-helpers';
+import { initialBoundaries, initialDirection, initialSnake } from './defaults';
 
 export type Position = { xPos: number, yPos: number }
 export type Direction = 'left' | 'right' | 'up' | 'down';
@@ -8,10 +9,12 @@ export type SnakeFragment = {
 } & Position;
 
 export type Game = {
-  snakeFragmentPositions: SnakeFragment[],
+  boundaries: Boundaries,
   currentDirection: Direction,
   nextDirection: Direction,
   nextMoveSpeed: number,
+
+  snakeFragmentPositions: SnakeFragment[],
 
   foodPosition: {
     xPos: number,
@@ -27,7 +30,35 @@ export type Boundaries = {
   maxYPos: number
 }
 
-export function calculateNextPos (
+export function buildGame(): Game {
+  return {
+    boundaries: {
+      ...initialBoundaries
+    },
+    snakeFragmentPositions: initialSnake(),
+    currentDirection: initialDirection,
+    nextDirection: initialDirection,
+    nextMoveSpeed: 1,
+    foodPosition: buildFood(initialBoundaries)
+  };
+};
+
+export function updateSnakeDirection(
+  game: Game,
+  inputtedDirection: Direction | null
+): void {
+  if (inputtedDirection === null) {
+    return;
+  }
+
+  if (directionsAreOpposite(inputtedDirection, game.currentDirection)) {
+    return;
+  }
+
+  game.nextDirection = inputtedDirection;
+}
+
+export function calculateNextPos(
   nextDirection: Direction,
   previousPos: Position,
   boundaries: Boundaries,
@@ -70,7 +101,7 @@ const oppositeDirections: { [direction in Direction]: Direction } = {
   down: 'up'
 };
 
-export function directionsAreOpposite (
+export function directionsAreOpposite(
   inputtedDirection: Direction,
   currentDirection: Direction
 ): boolean {
@@ -81,13 +112,13 @@ export function directionsAreOpposite (
   return false;
 }
 
-export function getOppositeDirection (
+export function getOppositeDirection(
   direction: Direction
 ): Direction {
   return oppositeDirections[direction];
 }
 
-export function isVerticalDirection (
+export function isVerticalDirection(
   direction: Direction
 ): boolean {
   if (direction === 'up' || direction === 'down') {
@@ -97,7 +128,7 @@ export function isVerticalDirection (
   return false;
 }
 
-export function directionsAreNextToEachOther (
+export function directionsAreNextToEachOther(
   firstDirection: Direction,
   secondDirection: Direction
 ): boolean {
@@ -106,7 +137,7 @@ export function directionsAreNextToEachOther (
   return firstIsVertical !== secondIsVertical;
 }
 
-export function getDirectionFromTo (
+export function getDirectionFromTo(
   firstFragment: SnakeFragment,
   secondFragment: SnakeFragment
 ): Direction {
@@ -131,15 +162,23 @@ export function getDirectionFromTo (
   throw new Error();
 }
 
-export function randomFood (payload: { maxXPos: number, maxYPos: number }): SnakeFragment {
+export function randomPosition(
+  payload: { maxXPos: number, maxYPos: number }
+): Position {
   return {
     xPos: Math.floor(Math.random() * payload.maxXPos),
-    yPos: Math.floor(Math.random() * payload.maxYPos),
+    yPos: Math.floor(Math.random() * payload.maxYPos)
+  };
+}
+
+export function buildFood(boundaries: Boundaries): SnakeFragment {
+  return {
+    ...randomPosition(boundaries),
     color: 'red'
   };
 }
 
-export function updatePositions (
+export function updatePositions(
   game: Game,
   boundaries: Boundaries,
   restartGame: () => void
@@ -156,7 +195,7 @@ export function updatePositions (
   if (newHeadPosition.xPos === game.foodPosition.xPos &&
     newHeadPosition.yPos === game.foodPosition.yPos) {
     // food collected
-    game.foodPosition = randomFood(boundaries);
+    game.foodPosition = buildFood(boundaries);
     game.snakeFragmentPositions.unshift(oldTailPosition);
   } else {
     const crash = nonHeadPositions.some(fragmentPos =>
@@ -171,7 +210,7 @@ export function updatePositions (
   game.currentDirection = game.nextDirection;
 }
 
-function moveEachPositionForward (
+function moveEachPositionForward(
   snakeFragmentPositions: SnakeFragment[],
   nextDirection: Direction,
   boundaries: Boundaries

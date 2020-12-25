@@ -1,43 +1,28 @@
-
-import { directionsAreOpposite, Game, getDirectionFromTo, randomFood, updatePositions, SnakeFragment as SnakeFragmentType, Direction } from '@/game-logic';
+import { getDirectionFromTo, updatePositions, SnakeFragment as SnakeFragmentType, Direction, buildGame, updateSnakeDirection } from '@/game-logic';
 import { calculateModifierX, calculateModifierY, mapEventKeyToDirection, mapFoodTo, mapFragmentTo } from '@/screen-logic';
 import { defineComponent, onMounted, reactive, computed, onUnmounted } from 'vue';
 
 import SnakeFragment from '@/components/SnakeFragment';
 import { eventManager, Unsubscribe } from '@/event-manager';
-import { initialBoundaries, initialDirection, initialSnake } from '@/defaults';
+import { initialBoundaries } from '@/defaults';
 import Food from '@/components/Food';
 import { mapButBetter } from '@/array-helpers';
 
 export default defineComponent({
   name: 'Snake',
 
-  setup () {
-    const boundaries = {
-      ...initialBoundaries
-    };
-
-    const buildGame = (): Game => {
-      return {
-        snakeFragmentPositions: initialSnake(),
-        currentDirection: initialDirection,
-        nextDirection: initialDirection,
-        nextMoveSpeed: 1,
-        foodPosition: randomFood(boundaries),
-      };
-    };
-
+  setup() {
     const state = reactive({
       game: buildGame(),
       modifiers: {
-        pxModifierX: calculateModifierX(window.innerWidth, boundaries),
-        pxModifierY: calculateModifierY(window.innerHeight, boundaries)
+        pxModifierX: calculateModifierX(window.innerWidth, initialBoundaries),
+        pxModifierY: calculateModifierY(window.innerHeight, initialBoundaries)
       }
     });
 
     const exposedState = {
       snakeFragments: computed(() => {
-        const snakeFragmentPositionsWithDirections = mapButBetter<SnakeFragmentType, SnakeFragmentType & {prevDirection: Direction | null, nextDirection: Direction | null}>(state.game.snakeFragmentPositions, {
+        const snakeFragmentPositionsWithDirections = mapButBetter<SnakeFragmentType, SnakeFragmentType & { prevDirection: Direction | null, nextDirection: Direction | null }>(state.game.snakeFragmentPositions, {
           firstEntryCallback: (payload) => {
             const { current: tailFragment, next: nextFragment } = payload;
 
@@ -96,28 +81,19 @@ export default defineComponent({
 
     onMounted(() => {
       eventSubscribers.push(eventManager.onWindowResize(() => {
-        state.modifiers.pxModifierX = calculateModifierX(window.innerWidth, boundaries);
-        state.modifiers.pxModifierY = calculateModifierY(window.innerHeight, boundaries);
+        state.modifiers.pxModifierX = calculateModifierX(window.innerWidth, state.game.boundaries);
+        state.modifiers.pxModifierY = calculateModifierY(window.innerHeight, state.game.boundaries);
       }));
 
       eventSubscribers.push(eventManager.onInterval(() => {
-        updatePositions(state.game, boundaries, () => {
+        updatePositions(state.game, state.game.boundaries, () => {
           state.game = reactive(buildGame());
         });
       }, computed(() => 1000 / state.game.nextMoveSpeed)));
 
       eventSubscribers.push(eventManager.onKeyDown((evt) => {
         const inputtedDirection = mapEventKeyToDirection(evt.key);
-
-        if (inputtedDirection === null) {
-          return;
-        }
-
-        if (directionsAreOpposite(inputtedDirection, state.game.currentDirection)) {
-          return;
-        }
-
-        state.game.nextDirection = inputtedDirection;
+        updateSnakeDirection(state.game, inputtedDirection);
       }));
 
       eventSubscribers.push(eventManager.onKeyHeldDown({
@@ -139,7 +115,7 @@ export default defineComponent({
     return exposedState;
   },
 
-  render () {
+  render() {
     return <div>
       {this.snakeFragments.map(snakeFragment =>
         <SnakeFragment

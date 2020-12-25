@@ -12,7 +12,7 @@ export const initialBoundaries: Boundaries = {
   minYPos: 0,
   maxYPos: 19,
 };
-export function initialSnake () {
+export function initialSnake() {
   return [
     { xPos: 0, yPos: 0, color: initialColor },
     { xPos: 1, yPos: 0, color: initialColor },

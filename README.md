@@ -11,9 +11,9 @@ Stuff I could still do:
 - after that I could write a visualizer for the code and reference tree contained in chunks again, would be fun
 - styling
 - - display score in the head of the snake
-- - make corners of the snake rounded (make screen black)
+- - make corners of the snake rounded (make screen black) #DONE
 - - increase speed/area of play by collecting points
-- - add quick speed via hold down
+- - add quick speed via hold down #KINDA-DONE
 
 
 Interesting stuff to remember:

@@ -31,6 +31,7 @@ module.exports = {
       }
     }],
     '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/ban-ts-ignore': 'off'
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    'space-before-function-paren': ["warn", "never"]
   }
 }

@@ -1,4 +1,4 @@
-export function forEachButBetter<T> (
+export function forEachButBetter<T>(
   arr: T[],
   callbacks: {
         middleEntryCallback: (payload: { current: T, next: T }) => void,
@@ -25,7 +25,7 @@ export function forEachButBetter<T> (
   }
 }
 
-export function mapButBetter<T, TRet> (
+export function mapButBetter<T, TRet>(
   arr: T[],
   callbacks: {
         firstEntryCallback: (payload: { current: T, next: T }) => TRet,
