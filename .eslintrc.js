@@ -19,5 +19,18 @@ module.exports = {
     'comma-dangle': 'off',
     'semi': ["error", "always"],
     '@typescript-eslint/no-empty-function': isProd ? 'error' : 'warn',
+    "@typescript-eslint/no-use-before-define": ["error", { "functions": false }],
+    "@typescript-eslint/member-delimiter-style": ["error", {
+      "multiline": {
+        "delimiter": "comma",
+        "requireLast": false
+      },
+      "singleline": {
+        "delimiter": "comma",
+        "requireLast": false
+      }
+    }],
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off'
   }
 }

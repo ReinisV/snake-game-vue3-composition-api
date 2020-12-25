@@ -1,11 +1,13 @@
 
-import { directionsAreOpposite, Game, randomFood, updatePositions } from '@/game-logic';
-import { calculateModifierX, calculateModifierY, mapEventKeyToDirection, mapFragmentTo } from '@/screen-logic';
+import { directionsAreOpposite, Game, getDirectionFromTo, randomFood, updatePositions, SnakeFragment as SnakeFragmentType, Direction } from '@/game-logic';
+import { calculateModifierX, calculateModifierY, mapEventKeyToDirection, mapFoodTo, mapFragmentTo } from '@/screen-logic';
 import { defineComponent, onMounted, reactive, computed, onUnmounted } from 'vue';
 
 import SnakeFragment from '@/components/SnakeFragment';
 import { eventManager, Unsubscribe } from '@/event-manager';
 import { initialBoundaries, initialDirection, initialSnake } from '@/defaults';
+import Food from '@/components/Food';
+import { mapButBetter } from '@/array-helpers';
 
 export default defineComponent({
   name: 'Snake',
@@ -34,16 +36,53 @@ export default defineComponent({
     });
 
     const exposedState = {
-      snakeFragments: computed(() => state.game.snakeFragmentPositions.map(
-        fragment => {
-          const snakeViewFragment = mapFragmentTo({
-            fragment: fragment,
-            modifiers: state.modifiers
-          });
-          return snakeViewFragment;
-        })),
+      snakeFragments: computed(() => {
+        const snakeFragmentPositionsWithDirections = mapButBetter<SnakeFragmentType, SnakeFragmentType & {prevDirection: Direction | null, nextDirection: Direction | null}>(state.game.snakeFragmentPositions, {
+          firstEntryCallback: (payload) => {
+            const { current: tailFragment, next: nextFragment } = payload;
 
-      foodFragment: computed(() => mapFragmentTo({
+            const snakeViewFragment = {
+              ...tailFragment,
+              prevDirection: null,
+              nextDirection: getDirectionFromTo(tailFragment, nextFragment),
+            };
+
+            return snakeViewFragment;
+          },
+
+          middleEntryCallback: (payload) => {
+            const { previous: previousFragment, current: currentFragment, next: nextFragment } = payload;
+
+            const snakeViewFragment = {
+              ...currentFragment,
+              prevDirection: getDirectionFromTo(currentFragment, previousFragment),
+              nextDirection: getDirectionFromTo(currentFragment, nextFragment),
+            };
+
+            return snakeViewFragment;
+          },
+
+          lastEntryCallback: (payload) => {
+            const { previous: previousFragment, current: headFragment } = payload;
+
+            const snakeViewFragment = {
+              ...headFragment,
+              prevDirection: getDirectionFromTo(headFragment, previousFragment),
+              nextDirection: null,
+            };
+
+            return snakeViewFragment;
+          },
+        });
+
+        const snakeViewFragments = snakeFragmentPositionsWithDirections.map(fragment => mapFragmentTo({
+          fragment: fragment,
+          modifiers: state.modifiers
+        }));
+        return snakeViewFragments;
+      }),
+
+      foodFragment: computed(() => mapFoodTo({
         fragment: state.game.foodPosition,
         modifiers: state.modifiers
       }))
@@ -65,7 +104,7 @@ export default defineComponent({
         updatePositions(state.game, boundaries, () => {
           state.game = reactive(buildGame());
         });
-      }, 600));
+      }, computed(() => 1000 / state.game.nextMoveSpeed)));
 
       eventSubscribers.push(eventManager.onKeyDown((evt) => {
         const inputtedDirection = mapEventKeyToDirection(evt.key);
@@ -83,20 +122,17 @@ export default defineComponent({
 
       eventSubscribers.push(eventManager.onKeyHeldDown({
         heldDownStart: (evt) => {
-          console.log('heldDownStart', evt.key);
           const inputtedDirection = mapEventKeyToDirection(evt.key);
           if (state.game.nextDirection === inputtedDirection) {
             state.game.nextMoveSpeed = 2;
           }
         },
         heldDownEnd: (evt) => {
-          console.log('heldDownEnd', evt.key);
           const inputtedDirection = mapEventKeyToDirection(evt.key);
           if (state.game.nextDirection === inputtedDirection) {
             state.game.nextMoveSpeed = 1;
           }
-        },
-        keyHeldDownInterval: 200,
+        }
       }));
     });
 
@@ -111,9 +147,12 @@ export default defineComponent({
           yPosInPx={snakeFragment.yPosInPx}
           widthInPx={snakeFragment.widthInPx}
           heightInPx={snakeFragment.heightInPx}
-          color={snakeFragment.color} />
+          color={snakeFragment.color}
+          // it would be cool to get non-nullability working for props too
+          prevDirection={snakeFragment.prevDirection!}
+          nextDirection={snakeFragment.nextDirection!} />
       )}
-      <SnakeFragment
+      <Food
         xPosInPx={this.foodFragment.xPosInPx}
         yPosInPx={this.foodFragment.yPosInPx}
         widthInPx={this.foodFragment.widthInPx}
