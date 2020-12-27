@@ -3,8 +3,8 @@ const execa = require('execa');
 
 (async() => {
   try {
-    // await execa('git', ['checkout', '--orphan', 'gh-pages']);
-    await execa('git', ['checkout', 'origin/gh-pages']);
+    await execa('git', ['checkout', '--orphan', 'gh-pages']);
+    // await execa('git', ['checkout', 'origin/gh-pages']);
 
     console.log('Building started...');
     await execa('npm', ['run', 'build']);
