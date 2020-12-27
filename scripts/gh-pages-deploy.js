@@ -3,8 +3,8 @@ const execa = require('execa');
 
 (async() => {
   try {
-    await execa('git', ['checkout', '--orphan', 'gh-pages']);
-    // await execa('git', ['checkout', 'origin/gh-pages']);
+    // await execa('git', ['checkout', '--orphan', 'gh-pages']);
+    await execa('git', ['checkout', 'origin/gh-pages']);
 
     console.log('Building started...');
     await execa('npm', ['run', 'build']);
@@ -17,7 +17,7 @@ const execa = require('execa');
     await execa('git', ['push', 'origin', 'HEAD:gh-pages', '--force']);
     await execa('rm', ['-r', folderName]);
     await execa('git', ['checkout', '-f', 'main']);
-    await execa('git', ['branch', '-D', 'gh-pages']);
+    // await execa('git', ['branch', '-D', 'gh-pages']);
 
     console.log('Successfully deployed, check your settings');
   } catch (e) {
