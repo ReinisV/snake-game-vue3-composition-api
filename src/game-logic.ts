@@ -13,6 +13,7 @@ export type Game = {
   currentDirection: Direction,
   nextDirection: Direction,
   nextMoveSpeed: number,
+  points: number,
 
   snakeFragmentPositions: SnakeFragment[],
 
@@ -35,28 +36,66 @@ export function buildGame(): Game {
     boundaries: {
       ...initialBoundaries
     },
-    snakeFragmentPositions: initialSnake(),
     currentDirection: initialDirection,
     nextDirection: initialDirection,
     nextMoveSpeed: 1,
+    points: 0,
+
+    snakeFragmentPositions: initialSnake(),
+
     foodPosition: buildFood(initialBoundaries)
   };
 };
 
-export function updateSnakeDirection(
-  game: Game,
-  inputtedDirection: Direction | null
-): void {
-  if (inputtedDirection === null) {
-    return;
-  }
+export const gameLogic = {
+  updateSnakeDirection(
+    game: Game,
+    inputtedDirection: Direction | null
+  ): void {
+    if (inputtedDirection === null) {
+      return;
+    }
 
-  if (directionsAreOpposite(inputtedDirection, game.currentDirection)) {
-    return;
-  }
+    if (directionsAreOpposite(inputtedDirection, game.currentDirection)) {
+      return;
+    }
 
-  game.nextDirection = inputtedDirection;
-}
+    game.nextDirection = inputtedDirection;
+  },
+
+  moveForward(
+    game: Game,
+    boundaries: Boundaries,
+    restartGame: () => void
+  ): void {
+    const oldTailPosition = {
+      ...game.snakeFragmentPositions[0]
+    };
+
+    moveEachPositionForward(game.snakeFragmentPositions, game.nextDirection, boundaries);
+
+    const newHeadPosition = game.snakeFragmentPositions[game.snakeFragmentPositions.length - 1];
+    const nonHeadPositions = game.snakeFragmentPositions.slice(0, game.snakeFragmentPositions.length - 1);
+
+    if (newHeadPosition.xPos === game.foodPosition.xPos &&
+      newHeadPosition.yPos === game.foodPosition.yPos) {
+      // food collected
+      game.foodPosition = buildFood(boundaries);
+      game.snakeFragmentPositions.unshift(oldTailPosition);
+      game.points += 1;
+    } else {
+      const crash = nonHeadPositions.some(fragmentPos =>
+        fragmentPos.xPos === newHeadPosition.xPos &&
+        fragmentPos.yPos === newHeadPosition.yPos);
+      if (crash) {
+        restartGame();
+        return;
+      }
+    }
+
+    game.currentDirection = game.nextDirection;
+  }
+};
 
 export function calculateNextPos(
   nextDirection: Direction,
@@ -176,38 +215,6 @@ export function buildFood(boundaries: Boundaries): SnakeFragment {
     ...randomPosition(boundaries),
     color: 'red'
   };
-}
-
-export function updatePositions(
-  game: Game,
-  boundaries: Boundaries,
-  restartGame: () => void
-): void {
-  const oldTailPosition = {
-    ...game.snakeFragmentPositions[0]
-  };
-
-  moveEachPositionForward(game.snakeFragmentPositions, game.nextDirection, boundaries);
-
-  const newHeadPosition = game.snakeFragmentPositions[game.snakeFragmentPositions.length - 1];
-  const nonHeadPositions = game.snakeFragmentPositions.slice(0, game.snakeFragmentPositions.length - 1);
-
-  if (newHeadPosition.xPos === game.foodPosition.xPos &&
-    newHeadPosition.yPos === game.foodPosition.yPos) {
-    // food collected
-    game.foodPosition = buildFood(boundaries);
-    game.snakeFragmentPositions.unshift(oldTailPosition);
-  } else {
-    const crash = nonHeadPositions.some(fragmentPos =>
-      fragmentPos.xPos === newHeadPosition.xPos &&
-      fragmentPos.yPos === newHeadPosition.yPos);
-    if (crash) {
-      restartGame();
-      return;
-    }
-  }
-
-  game.currentDirection = game.nextDirection;
 }
 
 function moveEachPositionForward(
