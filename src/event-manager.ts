@@ -20,12 +20,12 @@ export const eventManager = {
     let id = startInterval(interval.value);
     let shouldBeReset = false;
 
-    function resetMethod () {
+    function resetMethod() {
       window.clearInterval(id);
       id = startInterval(interval.value);
     };
 
-    function startInterval (intervalValue: number): number {
+    function startInterval(intervalValue: number): number {
       return window.setInterval(() => {
         callback();
         if (shouldBeReset) {
@@ -53,8 +53,8 @@ export const eventManager = {
    * @param payload
    */
   onKeyHeldDown: (payload: {
-    heldDownStart: (evt: KeyboardEvent) => void;
-    heldDownEnd: (evt: KeyboardEvent) => void;
+    heldDownStart: (evt: KeyboardEvent) => void,
+    heldDownEnd: (evt: KeyboardEvent) => void
   }): Unsubscribe => {
     const { heldDownStart, heldDownEnd } = payload;
 
