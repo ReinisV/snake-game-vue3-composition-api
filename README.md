@@ -8,15 +8,23 @@ Fun features include the fact that the game is always fullscreen and adjusts to 
 
 Stuff I could still do:
 - figure out how to eject (or most likely write an app for ejecting) webpack config (could be done based on the dynamic webpack config stored by the cli)
+
 - write a backend app that can based on user-agent detect browser version and serve a custom build for the specific browser without including polyfills for others
 - - and configure webpack to build for different target browsers
 - - and a fallback script to return that just prints "your browser is unsupported, please try these:" or "your browser version is old, please update to at least Y" 
+
 - after that I could write a visualizer for the code and reference tree contained in chunks again, would be fun
+
 - styling
-- - display score in the head of the snake
+- - display score in the head of the snake #DONE
 - - make corners of the snake rounded (make screen black) #DONE
 - - increase speed/area of play by collecting points
 - - add quick speed via hold down #KINDA-DONE
+
+- frontend related stuff
+- - figure out union type props for vue
+- - integrate vuex with simple-vuex and an object interface
+- - add yaml package.json that can be commented
 
 
 Interesting stuff to remember:
