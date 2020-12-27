@@ -2,8 +2,7 @@
 I wanted to have fun while exploring the composition api so used the classic exercise of writing a snake game to do that. 
 
 You can take a look at what the current result looks like here:
-https://reinisv.github.io/snake-game-vue3-composition-api/dist/snake 
-(I know, I'll figure out correct subdomaining when I have motivation to do it)
+https://reinisv.github.io/snake-game-vue3-composition-api/snake
 
 Fun features include the fact that the game is always fullscreen and adjusts to the width and height of the browser by becoming more compact. Try resizing while playing.
 
