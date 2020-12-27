@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve-webpack": "webpack serve --open --config './node_modules/@vue/cli-service/webpack.config.js'",
     "build": "vue-cli-service build",
+    "build-webpack": "webpack --config './node_modules/@vue/cli-service/webpack.config.js'",
     "lint": "vue-cli-service lint",
     "deploy": "node scripts/gh-pages-deploy.js"
   },
@@ -38,6 +40,7 @@
     "execa": "^5.0.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.3",
+    "webpack-cli": "^4.3.0"
   }
 }

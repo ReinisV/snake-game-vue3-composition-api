@@ -7,7 +7,6 @@ https://reinisv.github.io/snake-game-vue3-composition-api/snake
 Fun features include the fact that the game is always fullscreen and adjusts to the width and height of the browser by becoming more compact. Try resizing while playing.
 
 Stuff I could still do:
-- figure out how to eject (or most likely write an app for ejecting) webpack config (could be done based on the dynamic webpack config stored by the cli)
 
 - write a backend app that can based on user-agent detect browser version and serve a custom build for the specific browser without including polyfills for others
 - - and configure webpack to build for different target browsers
@@ -18,51 +17,16 @@ Stuff I could still do:
 - styling
 - - display score in the head of the snake #DONE
 - - make corners of the snake rounded (make screen black) #DONE
-- - increase speed/area of play by collecting points
-- - add quick speed via hold down #KINDA-DONE
+- - increase speed/area of play by collecting points #KINDA-DONE
+- - - there is still the bug of going over the page threshold when collecting a point that triggers 'crash state3'
+- - add quick speed via hold down #DONE
 
 - frontend related stuff
 - - figure out union type props for vue
 - - integrate vuex with simple-vuex and an object interface
 - - add yaml package.json that can be commented
+- - figure out how to eject (or most likely write an app for ejecting) webpack config (could be done based on the dynamic webpack config stored by the cli)
 
-
-Interesting stuff to remember:
-the following json enables autofixing of linting issues when added to `settings.json` of VSCode:
-```
-{
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.validate": [
-        {
-            "language": "vue",
-            "autoFix": true
-        },
-        {
-            "language": "html",
-            "autoFix": true
-        },
-        {
-            "language": "javascript",
-            "autoFix": true
-        },
-        {
-            "language": "javascriptreact",
-            "autoFix": true
-        },
-        {
-            "language": "typescript",
-            "autoFix": true
-        },
-        {
-            "language": "typescriptreact",
-            "autoFix": true
-        }
-    ],
-}
-```
 
 ## Project setup
 ```
