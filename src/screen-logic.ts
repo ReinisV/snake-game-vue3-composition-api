@@ -1,6 +1,6 @@
 import { Direction, SnakeFragment } from './game-logic';
 
-export function mapEventKeyToDirection (eventKey: string): Direction | null {
+export function mapEventKeyToDirection(eventKey: string): Direction | null {
   if (eventKey === 'ArrowLeft') {
     return 'left';
   }
@@ -15,7 +15,7 @@ export function mapEventKeyToDirection (eventKey: string): Direction | null {
   }
   return null;
 }
-export function mapDirectionToBorderProp (direction: Direction): 'bottom' | 'top' | 'right' | 'left' {
+export function mapDirectionToBorderProp(direction: Direction): 'bottom' | 'top' | 'right' | 'left' {
   if (direction === 'right') {
     return 'right';
   }
@@ -32,21 +32,21 @@ export function mapDirectionToBorderProp (direction: Direction): 'bottom' | 'top
   throw new Error();
 }
 
-export function calculateModifierY (
+export function calculateModifierY(
   windowInnerHeight: number,
   boundaries: { maxYPos: number, minYPos: number }
 ): number {
   return windowInnerHeight / (boundaries.maxYPos - boundaries.minYPos);
 }
 
-export function calculateModifierX (
+export function calculateModifierX(
   windowInnerWidth: number,
   boundaries: { maxXPos: number, minXPos: number }
 ): number {
   return windowInnerWidth / (boundaries.maxXPos - boundaries.minXPos);
 }
 
-export function mapFoodTo (payload: {
+export function mapFoodTo(payload: {
   fragment: SnakeFragment,
   modifiers: {
     pxModifierX: number,
@@ -70,7 +70,7 @@ export function mapFoodTo (payload: {
   };
 }
 
-export function mapFragmentTo (payload: {
+export function mapFragmentTo(payload: {
   fragment: SnakeFragment & {prevDirection: Direction | null, nextDirection: Direction | null},
   modifiers: {
     pxModifierX: number,

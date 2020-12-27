@@ -2,6 +2,48 @@ import { Direction, directionsAreNextToEachOther, getOppositeDirection, isVertic
 import { mapDirectionToBorderProp } from '@/screen-logic';
 import { defineComponent } from 'vue';
 
+/**
+ * returns something like `border-top-right-radius`
+ * where 'top' is the border prop value of Direction 'up'
+ * and where 'right' is the border prop value of Direction 'right'
+ * @param firstDirection first direction in the string (should always be vertical direction, i.e. either 'up' or 'down')
+ * @param secondDirection second direction in the string (should always be horizontal direction, i.e. either 'left' or 'right')
+ */
+function getBorderProp(firstDirection: Direction, secondDirection: Direction): string {
+  return `border-${mapDirectionToBorderProp(firstDirection)}-${mapDirectionToBorderProp(secondDirection)}-radius`;
+}
+
+function getBorderPropBasedOnDirections(payload: {
+  prevDirection: Direction,
+  nextDirection: Direction
+}): string | null {
+  const { prevDirection, nextDirection } = payload;
+
+  const isMidFragment = prevDirection !== null &&
+    nextDirection !== null;
+
+  if (isMidFragment &&
+    directionsAreNextToEachOther(prevDirection, nextDirection)) {
+    // get the opposite corner for rounding
+    const oppositePrevDirection = getOppositeDirection(prevDirection);
+    const oppositeNextDirection = getOppositeDirection(nextDirection);
+
+    if (isVerticalDirection(oppositePrevDirection)) {
+      // vertical direction ('top' or 'bottom') must always come first
+      return getBorderProp(oppositePrevDirection, oppositeNextDirection);
+    } else {
+      return getBorderProp(oppositeNextDirection, oppositePrevDirection);
+    }
+  }
+
+  const isEndFragment = prevDirection === null;
+  if (isEndFragment) {
+
+  }
+
+  return null;
+}
+
 export default defineComponent({
   name: 'SnakeFragment',
   props: {
@@ -28,20 +70,11 @@ export default defineComponent({
       opacity: 0.8,
     };
 
-    if (this.prevDirection !== null &&
-      this.nextDirection !== null &&
-      directionsAreNextToEachOther(this.prevDirection as Direction, this.nextDirection as Direction)) {
-      const oppositePrevDirection = getOppositeDirection(this.prevDirection as Direction);
-      const oppositeNextDirection = getOppositeDirection(this.nextDirection as Direction);
-
-      let connected = '';
-      if (isVerticalDirection(oppositePrevDirection)) {
-        connected = `${mapDirectionToBorderProp(oppositePrevDirection)}-${mapDirectionToBorderProp(oppositeNextDirection)}`;
-      } else {
-        connected = `${mapDirectionToBorderProp(oppositeNextDirection)}-${mapDirectionToBorderProp(oppositePrevDirection)}`;
-      }
-
-      const borderProp = `border-${connected}-radius`;
+    const borderProp = getBorderPropBasedOnDirections({
+      prevDirection: this.prevDirection as Direction,
+      nextDirection: this.nextDirection as Direction,
+    });
+    if (borderProp !== null) {
       // @ts-ignore
       styleObject[borderProp] = '40px';
     }

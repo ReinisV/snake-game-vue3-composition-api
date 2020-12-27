@@ -11,7 +11,7 @@ export default defineComponent({
     color: String,
   },
 
-  render () {
+  render() {
     return <div
       class="text"
       style={{
