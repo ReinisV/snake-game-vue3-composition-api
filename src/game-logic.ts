@@ -1,28 +1,5 @@
-import { forEachButBetter } from './array-helpers';
-import { initialBoundaries, initialDirection, initialSnake } from './defaults';
-
 export type Position = { xPos: number, yPos: number }
 export type Direction = 'left' | 'right' | 'up' | 'down';
-
-export type SnakeFragment = {
-  color: string
-} & Position;
-
-export type Game = {
-  boundaries: Boundaries,
-  currentDirection: Direction,
-  nextDirection: Direction,
-  nextMoveSpeed: number,
-  points: number,
-
-  snakeFragmentPositions: SnakeFragment[],
-
-  foodPosition: {
-    xPos: number,
-    yPos: number,
-    color: string
-  }
-};
 
 export type Boundaries = {
   minXPos: number,
@@ -31,77 +8,10 @@ export type Boundaries = {
   maxYPos: number
 }
 
-export function buildGame(): Game {
-  return {
-    boundaries: {
-      ...initialBoundaries
-    },
-    currentDirection: initialDirection,
-    nextDirection: initialDirection,
-    nextMoveSpeed: 1,
-    points: 0,
-
-    snakeFragmentPositions: initialSnake(),
-
-    foodPosition: buildFood(initialBoundaries)
-  };
-};
-
-export const gameLogic = {
-  updateSnakeDirection(
-    game: Game,
-    inputtedDirection: Direction | null
-  ): void {
-    if (inputtedDirection === null) {
-      return;
-    }
-
-    if (directionsAreOpposite(inputtedDirection, game.currentDirection)) {
-      return;
-    }
-
-    game.nextDirection = inputtedDirection;
-  },
-
-  moveForward(
-    game: Game,
-    boundaries: Boundaries,
-    restartGame: () => void
-  ): void {
-    const oldTailPosition = {
-      ...game.snakeFragmentPositions[0]
-    };
-
-    moveEachPositionForward(game.snakeFragmentPositions, game.nextDirection, boundaries);
-
-    const newHeadPosition = game.snakeFragmentPositions[game.snakeFragmentPositions.length - 1];
-    const nonHeadPositions = game.snakeFragmentPositions.slice(0, game.snakeFragmentPositions.length - 1);
-
-    if (newHeadPosition.xPos === game.foodPosition.xPos &&
-      newHeadPosition.yPos === game.foodPosition.yPos) {
-      // food collected
-      game.foodPosition = buildFood(boundaries);
-      game.snakeFragmentPositions.unshift(oldTailPosition);
-      game.points += 1;
-    } else {
-      const crash = nonHeadPositions.some(fragmentPos =>
-        fragmentPos.xPos === newHeadPosition.xPos &&
-        fragmentPos.yPos === newHeadPosition.yPos);
-      if (crash) {
-        restartGame();
-        return;
-      }
-    }
-
-    game.currentDirection = game.nextDirection;
-  }
-};
-
 export function calculateNextPos(
   nextDirection: Direction,
   previousPos: Position,
-  boundaries: Boundaries,
-  posIncrease: number
+  boundaries: Boundaries
 ): Position {
   const newPos = {
     xPos: previousPos.xPos,
@@ -109,23 +19,23 @@ export function calculateNextPos(
   };
 
   if (nextDirection === 'left') {
-    newPos.xPos = previousPos.xPos - posIncrease;
+    newPos.xPos = previousPos.xPos - 1;
   } else if (nextDirection === 'right') {
-    newPos.xPos = previousPos.xPos + posIncrease;
+    newPos.xPos = previousPos.xPos + 1;
   } else if (nextDirection === 'down') {
-    newPos.yPos = previousPos.yPos + posIncrease;
+    newPos.yPos = previousPos.yPos + 1;
   } else if (nextDirection === 'up') {
-    newPos.yPos = previousPos.yPos - posIncrease;
+    newPos.yPos = previousPos.yPos - 1;
   }
 
   if (newPos.xPos < boundaries.minXPos) {
-    newPos.xPos = boundaries.maxXPos;
+    newPos.xPos = boundaries.maxXPos - 1;
   } else if (newPos.xPos >= boundaries.maxXPos) {
     newPos.xPos = boundaries.minXPos;
   }
 
   if (newPos.yPos < boundaries.minYPos) {
-    newPos.yPos = boundaries.maxYPos;
+    newPos.yPos = boundaries.maxYPos - 1;
   } else if (newPos.yPos >= boundaries.maxYPos) {
     newPos.yPos = boundaries.minYPos;
   }
@@ -176,10 +86,12 @@ export function directionsAreNextToEachOther(
   return firstIsVertical !== secondIsVertical;
 }
 
-export function getDirectionFromTo(
-  firstFragment: SnakeFragment,
-  secondFragment: SnakeFragment
-): Direction {
+export function getDirectionFromTo(payload: {
+  firstFragment: Position,
+  secondFragment: Position
+}): Direction {
+  const { firstFragment, secondFragment } = payload;
+
   if (firstFragment.xPos === secondFragment.xPos) {
     if (firstFragment.yPos > secondFragment.yPos) {
       return 'up';
@@ -187,7 +99,7 @@ export function getDirectionFromTo(
     if (firstFragment.yPos < secondFragment.yPos) {
       return 'down';
     }
-    throw new Error();
+    throw new Error('crash state1:\n' + JSON.stringify(payload, undefined, 2));
   }
   if (firstFragment.yPos === secondFragment.yPos) {
     if (firstFragment.xPos > secondFragment.xPos) {
@@ -196,45 +108,30 @@ export function getDirectionFromTo(
     if (firstFragment.xPos < secondFragment.xPos) {
       return 'right';
     }
-    throw new Error();
+    throw new Error('crash state2:\n' + JSON.stringify(payload, undefined, 2));
   }
-  throw new Error();
+
+  throw new Error('crash state3:\n' + JSON.stringify(payload, undefined, 2));
 }
 
 export function randomPosition(
-  payload: { maxXPos: number, maxYPos: number }
+  boundaries: Boundaries,
+  exclude: Position[],
 ): Position {
+  const { maxXPos, minXPos, maxYPos, minYPos } = boundaries;
+
+  // todo write this better
   return {
-    xPos: Math.floor(Math.random() * payload.maxXPos),
-    yPos: Math.floor(Math.random() * payload.maxYPos)
+    xPos: notInArray(() => Math.floor(Math.random() * maxXPos) - minXPos, exclude.map(pos => pos.xPos)),
+    yPos: notInArray(() => Math.floor(Math.random() * maxYPos) - minYPos, exclude.map(pos => pos.xPos))
   };
 }
 
-export function buildFood(boundaries: Boundaries): SnakeFragment {
-  return {
-    ...randomPosition(boundaries),
-    color: 'red'
-  };
-}
-
-function moveEachPositionForward(
-  snakeFragmentPositions: SnakeFragment[],
-  nextDirection: Direction,
-  boundaries: Boundaries
-): void {
-  forEachButBetter(snakeFragmentPositions, {
-    middleEntryCallback: (payload) => {
-      const { current: fragment, next: nextFragment } = payload;
-
-      fragment.xPos = nextFragment.xPos;
-      fragment.yPos = nextFragment.yPos;
-    },
-    lastEntryCallback: (payload) => {
-      const { current: fragment } = payload;
-
-      const fragmentNewHeadPos = calculateNextPos(nextDirection, fragment, boundaries, 1);
-      fragment.xPos = fragmentNewHeadPos.xPos;
-      fragment.yPos = fragmentNewHeadPos.yPos;
-    },
-  });
+function notInArray(func: () => number, exclude: number[]): number {
+  while (true) {
+    const result = func();
+    if (!exclude.includes(result)) {
+      return result;
+    }
+  }
 }

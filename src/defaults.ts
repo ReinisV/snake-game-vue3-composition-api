@@ -8,9 +8,9 @@ const initialColor = 'white';
 
 export const initialBoundaries: Boundaries = {
   minXPos: 0,
-  maxXPos: 19,
+  maxXPos: 9,
   minYPos: 0,
-  maxYPos: 19,
+  maxYPos: 9,
 };
 export function initialSnake() {
   return [

@@ -81,7 +81,7 @@ export const eventManager = {
 
           // do all cleanup
           listeningInProgress.splice(listeningInProgress.indexOf(keydownEvt.key), 1);
-          document.addEventListener('keyup', cancelHeldDownCheckCallback);
+          document.removeEventListener('keyup', cancelHeldDownCheckCallback);
         }
       };
       document.addEventListener('keyup', cancelHeldDownCheckCallback);

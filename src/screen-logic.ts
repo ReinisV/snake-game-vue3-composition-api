@@ -1,4 +1,4 @@
-import { Direction, SnakeFragment } from './game-logic';
+import { Direction, Position } from './game-logic';
 
 export function mapEventKeyToDirection(eventKey: string): Direction | null {
   if (eventKey === 'ArrowLeft') {
@@ -47,7 +47,7 @@ export function calculateModifierX(
 }
 
 export function mapFoodTo(payload: {
-  fragment: SnakeFragment,
+  fragment: Position,
   modifiers: {
     pxModifierX: number,
     pxModifierY: number
@@ -56,8 +56,7 @@ export function mapFoodTo(payload: {
   xPosInPx: string,
   yPosInPx: string,
   widthInPx: string,
-  heightInPx: string,
-  color: string
+  heightInPx: string
 } {
   const { fragment, modifiers } = payload;
 
@@ -66,12 +65,11 @@ export function mapFoodTo(payload: {
     yPosInPx: fragment.yPos * modifiers.pxModifierY + 'px',
     widthInPx: 1 * modifiers.pxModifierX + 'px',
     heightInPx: 1 * modifiers.pxModifierY + 'px',
-    color: fragment.color,
   };
 }
 
 export function mapFragmentTo(payload: {
-  fragment: SnakeFragment & {prevDirection: Direction | null, nextDirection: Direction | null},
+  fragment: Position & {prevDirection: Direction | null, nextDirection: Direction | null},
   modifiers: {
     pxModifierX: number,
     pxModifierY: number
@@ -81,7 +79,6 @@ export function mapFragmentTo(payload: {
   yPosInPx: string,
   widthInPx: string,
   heightInPx: string,
-  color: string,
   prevDirection: Direction | null,
   nextDirection: Direction | null
 } {
@@ -92,7 +89,6 @@ export function mapFragmentTo(payload: {
     yPosInPx: fragment.yPos * modifiers.pxModifierY + 'px',
     widthInPx: 1 * modifiers.pxModifierX + 'px',
     heightInPx: 1 * modifiers.pxModifierY + 'px',
-    color: fragment.color,
     prevDirection: fragment.prevDirection,
     nextDirection: fragment.nextDirection,
   };
