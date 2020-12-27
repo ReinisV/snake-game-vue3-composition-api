@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/snake-game-vue3-composition-api/dist'
+  publicPath: '/snake-game-vue3-composition-api'
 };
