@@ -1,11 +1,9 @@
-import { getDirectionFromTo, Direction, Position } from '@/game-logic';
-import { calculateModifierX, calculateModifierY, mapEventKeyToDirection, mapFoodTo, mapFragmentTo } from '@/screen-logic';
+import { buildSnakeViewFragments, calculateModifierX, calculateModifierY, mapEventKeyToDirection, mapFoodTo } from '@/screen-logic';
 import { defineComponent, onMounted, reactive, computed, onUnmounted } from 'vue';
 
 import SnakeFragment from '@/components/SnakeFragment';
 import { eventManager, Unsubscribe } from '@/event-manager';
 import Food from '@/components/Food';
-import { mapButBetter } from '@/array-helpers';
 import { store } from '@/store';
 
 export default defineComponent({
@@ -108,67 +106,3 @@ export default defineComponent({
   }
 
 });
-
-type PositionWithDirections = Position & { prevDirection: Direction | null, nextDirection: Direction | null };
-
-function updateTailFragment(payload: { current: Position, next: Position }): PositionWithDirections {
-  const { current: tailFragment, next: nextFragment } = payload;
-
-  const snakeViewFragment = {
-    ...tailFragment,
-    prevDirection: null,
-    nextDirection: getDirectionFromTo({
-      firstFragment: tailFragment,
-      secondFragment: nextFragment
-    }),
-  };
-
-  return snakeViewFragment;
-}
-
-function updateMiddleFragment(payload: { previous: Position, current: Position, next: Position }): PositionWithDirections {
-  const { previous: previousFragment, current: currentFragment, next: nextFragment } = payload;
-
-  const snakeViewFragment = {
-    ...currentFragment,
-    prevDirection: getDirectionFromTo({
-      firstFragment: currentFragment,
-      secondFragment: previousFragment
-    }),
-    nextDirection: getDirectionFromTo({
-      firstFragment: currentFragment,
-      secondFragment: nextFragment
-    }),
-  };
-
-  return snakeViewFragment;
-}
-
-function updateHeadFragment(payload: { previous: Position, current: Position }): PositionWithDirections {
-  const { previous: previousFragment, current: headFragment } = payload;
-
-  const snakeViewFragment = {
-    ...headFragment,
-    prevDirection: getDirectionFromTo({
-      firstFragment: headFragment,
-      secondFragment: previousFragment
-    }),
-    nextDirection: null,
-  };
-
-  return snakeViewFragment;
-}
-
-function buildSnakeViewFragments(modifiers: { pxModifierX: number, pxModifierY: number }, snakeFragmentPositions: Position[]) {
-  const snakeFragmentPositionsWithDirections = mapButBetter(snakeFragmentPositions, {
-    firstEntryCallback: updateTailFragment,
-    middleEntryCallback: updateMiddleFragment,
-    lastEntryCallback: updateHeadFragment
-  });
-
-  const snakeViewFragments = snakeFragmentPositionsWithDirections.map(fragment => mapFragmentTo({
-    fragment: fragment,
-    modifiers: modifiers
-  }));
-  return snakeViewFragments;
-}

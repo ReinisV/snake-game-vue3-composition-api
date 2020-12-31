@@ -1,4 +1,5 @@
-import { Direction, Position } from './game-logic';
+import { mapButBetter } from './array-helpers';
+import { Direction, getDirectionFromTo, Position } from './game-logic';
 
 export function mapEventKeyToDirection(eventKey: string): Direction | null {
   if (eventKey === 'ArrowLeft') {
@@ -92,4 +93,68 @@ export function mapFragmentTo(payload: {
     prevDirection: fragment.prevDirection,
     nextDirection: fragment.nextDirection,
   };
+}
+
+type PositionWithDirections = Position & { prevDirection: Direction | null, nextDirection: Direction | null };
+
+function updateTailFragment(payload: { current: Position, next: Position }): PositionWithDirections {
+  const { current: tailFragment, next: nextFragment } = payload;
+
+  const snakeViewFragment = {
+    ...tailFragment,
+    prevDirection: null,
+    nextDirection: getDirectionFromTo({
+      firstFragment: tailFragment,
+      secondFragment: nextFragment
+    }),
+  };
+
+  return snakeViewFragment;
+}
+
+function updateMiddleFragment(payload: { previous: Position, current: Position, next: Position }): PositionWithDirections {
+  const { previous: previousFragment, current: currentFragment, next: nextFragment } = payload;
+
+  const snakeViewFragment = {
+    ...currentFragment,
+    prevDirection: getDirectionFromTo({
+      firstFragment: currentFragment,
+      secondFragment: previousFragment
+    }),
+    nextDirection: getDirectionFromTo({
+      firstFragment: currentFragment,
+      secondFragment: nextFragment
+    }),
+  };
+
+  return snakeViewFragment;
+}
+
+function updateHeadFragment(payload: { previous: Position, current: Position }): PositionWithDirections {
+  const { previous: previousFragment, current: headFragment } = payload;
+
+  const snakeViewFragment = {
+    ...headFragment,
+    prevDirection: getDirectionFromTo({
+      firstFragment: headFragment,
+      secondFragment: previousFragment
+    }),
+    nextDirection: null,
+  };
+
+  return snakeViewFragment;
+}
+
+export function buildSnakeViewFragments(modifiers: { pxModifierX: number, pxModifierY: number }, snakeFragmentPositions: Position[]) {
+  const snakeFragmentPositionsWithDirections = mapButBetter(snakeFragmentPositions, {
+    firstEntryCallback: updateTailFragment,
+    middleEntryCallback: updateMiddleFragment,
+    lastEntryCallback: updateHeadFragment
+  });
+
+  const snakeViewFragments = snakeFragmentPositionsWithDirections.map(fragment => mapFragmentTo({
+    fragment: fragment,
+    modifiers: modifiers
+  }));
+  return snakeViewFragments;
 }

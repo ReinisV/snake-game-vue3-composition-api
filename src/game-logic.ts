@@ -120,17 +120,29 @@ export function randomPosition(
 ): Position {
   const { maxXPos, minXPos, maxYPos, minYPos } = boundaries;
 
-  // todo write this better
-  return {
-    xPos: notInArray(() => Math.floor(Math.random() * maxXPos) - minXPos, exclude.map(pos => pos.xPos)),
-    yPos: notInArray(() => Math.floor(Math.random() * maxYPos) - minYPos, exclude.map(pos => pos.xPos))
-  };
+  // todo write this better,
+  // 1) get areas of all possible values that are within boundaries
+  // but are not the exclude values
+  // 2) get random values for each of the areas
+  // 3) randomly choose a value from one of the areas (use weights
+  // based on how big the areas were)
+  return notInArray(() => ({
+    xPos: Math.floor(Math.random() * maxXPos) - minXPos,
+    yPos: Math.floor(Math.random() * maxYPos) - minYPos
+  }),
+  (first, second) => { return first.xPos === second.xPos && first.yPos === second.yPos; },
+  exclude);
 }
 
-function notInArray(func: () => number, exclude: number[]): number {
+function notInArray<T>(
+  getValue: () => T,
+  isEqual: (first: T, second: T) => boolean,
+  exclude: T[]
+): T {
   while (true) {
-    const result = func();
-    if (!exclude.includes(result)) {
+    const result = getValue();
+    const anyEquals = exclude.some(ex => isEqual(result, ex));
+    if (!anyEquals) {
       return result;
     }
   }
