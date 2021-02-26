@@ -6,9 +6,11 @@ You can take a look at what the current result looks like here:
 <https://reinisv.github.io/snake-game-vue3-composition-api/snake>
 
 Fun features include:
+
 - the game is always fullscreen and adjusts to the width and height of the browser by becoming more compact. Try resizing while playing.
 
-Fun technical
+Fun technical features include:
+
 - fully typesafe class based Vuex. I've not seen better/simpler/easier-to-read Vuex definitions if you ask me. See how everything on state is exposed as DeepReadOnly, to have compile time errors on trying to modify state outside of mutations.
 - writing composition API is awesome.
 
