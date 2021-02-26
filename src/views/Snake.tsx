@@ -56,12 +56,14 @@ export default defineComponent({
     });
 
     return {
-      snakeFragments: computed(() => buildSnakeViewFragments(
-        {
-          pxModifierX: modifiers.pxModifierX.value,
-          pxModifierY: modifiers.pxModifierY.value
-        },
-        store.game.snakeFragmentPositions)),
+      snakeFragments: computed(() => {
+        return buildSnakeViewFragments(
+          {
+            pxModifierX: modifiers.pxModifierX.value,
+            pxModifierY: modifiers.pxModifierY.value
+          },
+          store.game.snakeFragmentPositions);
+      }),
       foodFragment: computed(() => mapFoodTo({
         fragment: store.game.foodPosition,
         modifiers: {

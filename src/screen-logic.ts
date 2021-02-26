@@ -1,5 +1,6 @@
 import { mapButBetter } from './array-helpers';
 import { Direction, getDirectionFromTo, Position } from './game-logic';
+import { DeepReadonlyArray } from './store/types/readonly-types';
 
 export function mapEventKeyToDirection(eventKey: string): Direction | null {
   if (eventKey === 'ArrowLeft') {
@@ -145,7 +146,10 @@ function updateHeadFragment(payload: { previous: Position, current: Position }):
   return snakeViewFragment;
 }
 
-export function buildSnakeViewFragments(modifiers: { pxModifierX: number, pxModifierY: number }, snakeFragmentPositions: Position[]) {
+export function buildSnakeViewFragments(
+  modifiers: { pxModifierX: number, pxModifierY: number },
+  snakeFragmentPositions: DeepReadonlyArray<Position>
+) {
   const snakeFragmentPositionsWithDirections = mapButBetter(snakeFragmentPositions, {
     firstEntryCallback: updateTailFragment,
     middleEntryCallback: updateMiddleFragment,

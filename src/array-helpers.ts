@@ -1,36 +1,11 @@
-export function forEachButBetter<T>(
-  arr: T[],
-  callbacks: {
-        middleEntryCallback: (payload: { current: T, next: T }) => void,
-        lastEntryCallback: (payload: { current: T }) => void
-    }
-): void {
-  for (let index = 0; index < arr.length; index++) {
-    const current = arr[index];
-
-    const lastEntryReached = index === arr.length - 1;
-    if (lastEntryReached) {
-      callbacks.lastEntryCallback({
-        current: current,
-      });
-
-      continue;
-    }
-
-    const next = arr[index + 1];
-    callbacks.middleEntryCallback({
-      current: current,
-      next: next
-    });
-  }
-}
+import { DeepReadonly, DeepReadonlyArray } from './store/types/readonly-types';
 
 export function mapButBetter<T, TRet>(
-  arr: T[],
+  arr: DeepReadonlyArray<T>,
   callbacks: {
-        firstEntryCallback: (payload: { current: T, next: T }) => TRet,
-        middleEntryCallback: (payload: { previous: T, current: T, next: T }) => TRet,
-        lastEntryCallback: (payload: { previous: T, current: T }) => TRet
+        firstEntryCallback: (payload: { current: DeepReadonly<T>, next: DeepReadonly<T> }) => TRet,
+        middleEntryCallback: (payload: { previous: DeepReadonly<T>, current: DeepReadonly<T>, next: DeepReadonly<T> }) => TRet,
+        lastEntryCallback: (payload: { previous: DeepReadonly<T>, current: DeepReadonly<T> }) => TRet
     }
 ): TRet[] {
   const result: TRet[] = [];

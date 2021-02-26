@@ -1,12 +1,12 @@
 import { createVuexStore } from 'vuex-simple';
 
-import { MyStore } from './store';
+import { SnakeGameStore } from './store';
 
-export const store = new MyStore();
+export const store = new SnakeGameStore();
 
 // create and export our store
 export default createVuexStore(store, {
-  strict: false,
+  strict: process.env.NODE_ENV !== 'production',
   modules: {},
   plugins: []
 });
