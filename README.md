@@ -1,4 +1,4 @@
-# hello-vue3
+# snake game (Vue3 composition API + class based fully typesafe vuex)
 I wanted to have fun while exploring the composition api so used the classic exercise of writing a snake game to do that. 
 
 You can take a look at what the current result looks like here:
@@ -23,7 +23,8 @@ Stuff I could still do:
 
 - frontend related stuff
 - - figure out union type props for vue
-- - integrate vuex with simple-vuex and an object interface
+- - integrate vuex with simple-vuex and an object interface #DONE
+- - and make state readonly for everyone, but mutations #DONE
 - - add yaml package.json that can be commented
 - - figure out how to eject (or most likely write an app for ejecting) webpack config (could be done based on the dynamic webpack config stored by the cli)
 
