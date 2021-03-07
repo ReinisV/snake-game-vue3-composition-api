@@ -48,6 +48,19 @@ class SnakeGameMutationsClass extends SnakeGameGettersWithMutableSnakeGameState 
     public ADD_POSITION_AT_END_OF_SNAKE(value: Position): void {
       this.game.snakeFragmentPositions.unshift(value);
     }
+
+  @Mutation()
+  public ADD_NEW_LEADERBOARD_ENTRY(score: number): void {
+    this.leaderboardScores.push({
+      name: 'You',
+      score: score
+    });
+  }
+
+  @Mutation()
+  public SET_GAME_STATE(gameState: 'finished'): void {
+    this.game.state = gameState;
+  }
 }
 
 // export mutations class for extending, but make it look like the state fields are immutable

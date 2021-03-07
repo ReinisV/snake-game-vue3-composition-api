@@ -1,5 +1,18 @@
 import { initialSnake, initialDirection, initialBoundaries } from './defaults';
 
+export type Game = {
+  currentDirection: Direction,
+  nextDirection: Direction,
+  inQuickSpeed: boolean,
+  points: number,
+
+  snakeFragmentPositions: Position[],
+
+  foodPosition: Position,
+
+  state: 'in-progress' | 'finished'
+};
+
 export type Position = { xPos: number, yPos: number }
 export type Direction = 'left' | 'right' | 'up' | 'down';
 
@@ -136,7 +149,7 @@ export function randomPosition(
   exclude);
 }
 
-export function buildGame() {
+export function buildGame(): Game {
   const snake = initialSnake();
   return {
     currentDirection: initialDirection,
@@ -147,6 +160,8 @@ export function buildGame() {
     snakeFragmentPositions: snake,
 
     foodPosition: randomPosition(initialBoundaries, snake),
+
+    state: 'in-progress'
   };
 };
 

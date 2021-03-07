@@ -1,23 +1,13 @@
-import { buildGame, Direction, Position } from '@/game-logic';
+import { Game } from '@/game-logic';
 import { State } from 'vuex-simple';
 import { convertStateToBeImmutable } from './types/readonly-modifiers';
 
 class SnakeGameStateClass {
-  public constructor() {
-    this.game = buildGame();
-  }
+    @State()
+    public game!: Game;
 
     @State()
-    public game: {
-        currentDirection: Direction,
-        nextDirection: Direction,
-        inQuickSpeed: boolean,
-        points: number,
-
-        snakeFragmentPositions: Position[],
-
-        foodPosition: Position
-    };
+    public leaderboardScores: {name: string, score: number}[] = [];
 }
 
 // expose the state class, but make it look like its readonly (so nobody modifies it outright)

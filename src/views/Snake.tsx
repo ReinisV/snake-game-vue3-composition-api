@@ -1,15 +1,25 @@
 import { buildSnakeViewFragments, calculateModifierX, calculateModifierY, mapEventKeyToDirection, mapFoodTo } from '@/screen-logic';
-import { defineComponent, onMounted, reactive, computed, onUnmounted } from 'vue';
+import { defineComponent, onMounted, reactive, computed, onUnmounted, watch } from 'vue';
 
 import SnakeFragment from '@/components/SnakeFragment';
 import { eventManager, Unsubscribe } from '@/event-manager';
 import Food from '@/components/Food';
 import { store } from '@/store';
+import router from '@/router';
 
 export default defineComponent({
   name: 'Snake',
 
   setup() {
+    store.SET_NEW_GAME();
+
+    const watchableGameState = computed(() => store.game.state);
+    watch(watchableGameState, (newValue) => {
+      if (newValue === 'finished') {
+        router.push({ name: 'Home' });
+      }
+    });
+
     const windowSize = reactive({
       width: window.innerWidth,
       height: window.innerHeight,

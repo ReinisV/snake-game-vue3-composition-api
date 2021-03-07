@@ -48,7 +48,8 @@ export class SnakeGameActions extends SnakeGameMutations {
           fragmentPos.xPos === newHeadPosition.xPos &&
                 fragmentPos.yPos === newHeadPosition.yPos);
         if (crash) {
-          this.SET_NEW_GAME();
+          this.SET_GAME_STATE('finished');
+          this.ADD_NEW_LEADERBOARD_ENTRY(this.game.points);
           return;
         }
       }
