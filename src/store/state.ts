@@ -1,6 +1,6 @@
 import { buildGame, Direction, Position } from '@/game-logic';
 import { State } from 'vuex-simple';
-import { DeepReadonly } from './types/readonly-types';
+import { convertStateToBeImmutable } from './types/readonly-modifiers';
 
 class SnakeGameStateClass {
   public constructor() {
@@ -21,6 +21,7 @@ class SnakeGameStateClass {
 }
 
 // expose the state class, but make it look like its readonly (so nobody modifies it outright)
-export const SnakeGameState = SnakeGameStateClass as unknown as { new(): DeepReadonly<SnakeGameStateClass> };
+export const SnakeGameState = convertStateToBeImmutable(SnakeGameStateClass);
+
 // but also expose a mutable type, so that mutations can use it (because only they are allowed to modify it)
 export type MutableSnakeGameState = SnakeGameStateClass;

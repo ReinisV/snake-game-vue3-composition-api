@@ -38,7 +38,7 @@ export class SnakeGameActions extends SnakeGameMutations {
 
       if (newHeadPosition.xPos === this.game.foodPosition.xPos &&
             newHeadPosition.yPos === this.game.foodPosition.yPos) {
-        // food collected
+        // food collected, create new food
         this.SET_RANDOM_FOOD_POSITION();
         // add an extra piece to the end
         this.ADD_POSITION_AT_END_OF_SNAKE(copyOfOldTailPosition);
