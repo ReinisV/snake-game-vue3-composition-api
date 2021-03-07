@@ -3,7 +3,7 @@
 I wanted to have fun while exploring the composition api so used the classic exercise of writing a snake game to do that.
 
 You can take a look at what the current result looks like here:
-<https://reinisv.github.io/snake-game-vue3-composition-api/snake>
+<https://reinisv.github.io/snake-game-vue3-composition-api>
 
 Fun features include:
 

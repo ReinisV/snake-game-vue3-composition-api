@@ -7,7 +7,7 @@ class SnakeGameStateClass {
     public game!: Game;
 
     @State()
-    public leaderboardScores: {name: string, score: number}[] = [];
+    public leaderboardScores: {name: string, score: number, time: Date}[] = [];
 }
 
 // expose the state class, but make it look like its readonly (so nobody modifies it outright)

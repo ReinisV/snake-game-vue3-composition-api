@@ -16,7 +16,7 @@ export default defineComponent({
     const watchableGameState = computed(() => store.game.state);
     watch(watchableGameState, (newValue) => {
       if (newValue === 'finished') {
-        router.push({ name: 'Home' });
+        router.push({ name: 'main-menu' });
       }
     });
 

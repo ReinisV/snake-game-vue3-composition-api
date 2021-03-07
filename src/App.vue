@@ -14,12 +14,12 @@ export default defineComponent({
   name: 'App',
   setup() {
     router.afterEach((to, from) => {
-      if (to.name === 'Snake') {
+      if (to.name === 'snake') {
         document.body.style.backgroundColor = 'black';
         return;
       }
 
-      if (from.name === 'Snake') {
+      if (from.name === 'snake') {
         document.body.style.backgroundColor = 'white';
       }
     });

@@ -53,7 +53,8 @@ class SnakeGameMutationsClass extends SnakeGameGettersWithMutableSnakeGameState 
   public ADD_NEW_LEADERBOARD_ENTRY(score: number): void {
     this.leaderboardScores.push({
       name: 'You',
-      score: score
+      score: score,
+      time: new Date()
     });
   }
 
