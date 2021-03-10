@@ -8,7 +8,10 @@
     "build": "vue-cli-service build",
     "build-webpack": "webpack --config './node_modules/@vue/cli-service/webpack.config.js'",
     "lint": "vue-cli-service lint",
-    "deploy": "node scripts/gh-pages-deploy.js"
+    "deploy": "node scripts/gh-pages-deploy.js",
+    "i-dev": "vue inspect -v > webpack.dev.config.js",
+    "i-dev-2": "node build-config",
+    "i-prod": "vue inspect -v --mode production > webpack.dev.config.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",

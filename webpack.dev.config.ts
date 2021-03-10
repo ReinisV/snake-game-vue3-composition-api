@@ -1,6 +1,21 @@
-{
+const postCssLoader = {
+    loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
+    options: {
+      sourceMap: false,
+      plugins: [
+        function creator() {
+          var transformer = initializer.apply(void 0, arguments);
+          transformer.postcssPlugin = name;
+          transformer.postcssVersion = new _processor.default().version;
+          return transformer;
+        }
+      ]
+    }
+  }
+
+exports.default = {
   mode: 'development',
-  context: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3',
+  context: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api',
   node: {
     setImmediate: false,
     process: 'mock',
@@ -11,14 +26,14 @@
     child_process: 'empty'
   },
   output: {
-    path: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\dist',
+    path: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\dist',
     filename: 'js/[name].js',
     publicPath: '/snake-game-vue3-composition-api/',
     chunkFilename: 'js/[name].js'
   },
   resolve: {
     alias: {
-      '@': 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\src',
+      '@': 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\src',
       vue$: 'vue/dist/vue.runtime.esm-bundler.js'
     },
     extensions: [
@@ -33,8 +48,8 @@
     ],
     modules: [
       'node_modules',
-      'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules',
-      'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\@vue\\cli-service\\node_modules'
+      'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules',
+      'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\@vue\\cli-service\\node_modules'
     ],
     plugins: [
       /* config.resolve.plugin('pnp') */
@@ -43,11 +58,11 @@
   },
   resolveLoader: {
     modules: [
-      'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\@vue\\cli-plugin-typescript\\node_modules',
-      'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\@vue\\cli-plugin-babel\\node_modules',
+      'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\@vue\\cli-plugin-typescript\\node_modules',
+      'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\@vue\\cli-plugin-babel\\node_modules',
       'node_modules',
-      'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules',
-      'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\@vue\\cli-service\\node_modules'
+      'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules',
+      'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\@vue\\cli-service\\node_modules'
     ],
     plugins: [
       /* config.resolve.plugin('pnp-loaders') */
@@ -63,18 +78,18 @@
         use: [
           /* config.module.rule('vue').use('cache-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\cache-loader\\dist\\cjs.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\cache-loader\\dist\\cjs.js',
             options: {
-              cacheDirectory: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: '323e1d21'
+              cacheDirectory: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\.cache\\vue-loader',
+              cacheIdentifier: '198d7266'
             }
           },
           /* config.module.rule('vue').use('vue-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\@vue\\cli-service\\node_modules\\vue-loader-v16\\dist\\index.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-loader-v16\\dist\\index.js',
             options: {
-              cacheDirectory: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\.cache\\vue-loader',
-              cacheIdentifier: '323e1d21',
+              cacheDirectory: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\.cache\\vue-loader',
+              cacheIdentifier: '198d7266',
               babelParserPlugins: [
                 'jsx',
                 'classProperties',
@@ -90,11 +105,11 @@
         use: [
           /* config.module.rule('images').use('url-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\url-loader\\dist\\cjs.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\url-loader\\dist\\cjs.js',
             options: {
               limit: 4096,
               fallback: {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\file-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\file-loader\\dist\\cjs.js',
                 options: {
                   name: 'img/[name].[hash:8].[ext]'
                 }
@@ -109,7 +124,7 @@
         use: [
           /* config.module.rule('svg').use('file-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\file-loader\\dist\\cjs.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\file-loader\\dist\\cjs.js',
             options: {
               name: 'img/[name].[hash:8].[ext]'
             }
@@ -122,11 +137,11 @@
         use: [
           /* config.module.rule('media').use('url-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\url-loader\\dist\\cjs.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\url-loader\\dist\\cjs.js',
             options: {
               limit: 4096,
               fallback: {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\file-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\file-loader\\dist\\cjs.js',
                 options: {
                   name: 'media/[name].[hash:8].[ext]'
                 }
@@ -141,11 +156,11 @@
         use: [
           /* config.module.rule('fonts').use('url-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\url-loader\\dist\\cjs.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\url-loader\\dist\\cjs.js',
             options: {
               limit: 4096,
               fallback: {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\file-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\file-loader\\dist\\cjs.js',
                 options: {
                   name: 'fonts/[name].[hash:8].[ext]'
                 }
@@ -193,7 +208,7 @@
             use: [
               /* config.module.rule('css').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -201,7 +216,7 @@
               },
               /* config.module.rule('css').oneOf('vue-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -212,11 +227,16 @@
               },
               /* config.module.rule('css').oneOf('vue-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               }
@@ -228,7 +248,7 @@
             use: [
               /* config.module.rule('css').oneOf('vue').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -236,7 +256,7 @@
               },
               /* config.module.rule('css').oneOf('vue').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -244,11 +264,16 @@
               },
               /* config.module.rule('css').oneOf('vue').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               }
@@ -260,7 +285,7 @@
             use: [
               /* config.module.rule('css').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -268,7 +293,7 @@
               },
               /* config.module.rule('css').oneOf('normal-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -279,11 +304,16 @@
               },
               /* config.module.rule('css').oneOf('normal-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               }
@@ -294,7 +324,7 @@
             use: [
               /* config.module.rule('css').oneOf('normal').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -302,7 +332,7 @@
               },
               /* config.module.rule('css').oneOf('normal').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -310,11 +340,16 @@
               },
               /* config.module.rule('css').oneOf('normal').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               }
@@ -332,7 +367,7 @@
             use: [
               /* config.module.rule('postcss').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -340,7 +375,7 @@
               },
               /* config.module.rule('postcss').oneOf('vue-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -351,11 +386,16 @@
               },
               /* config.module.rule('postcss').oneOf('vue-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               }
@@ -367,7 +407,7 @@
             use: [
               /* config.module.rule('postcss').oneOf('vue').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -375,7 +415,7 @@
               },
               /* config.module.rule('postcss').oneOf('vue').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -383,11 +423,16 @@
               },
               /* config.module.rule('postcss').oneOf('vue').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               }
@@ -399,7 +444,7 @@
             use: [
               /* config.module.rule('postcss').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -407,7 +452,7 @@
               },
               /* config.module.rule('postcss').oneOf('normal-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -418,11 +463,16 @@
               },
               /* config.module.rule('postcss').oneOf('normal-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               }
@@ -433,7 +483,7 @@
             use: [
               /* config.module.rule('postcss').oneOf('normal').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -441,7 +491,7 @@
               },
               /* config.module.rule('postcss').oneOf('normal').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -449,11 +499,16 @@
               },
               /* config.module.rule('postcss').oneOf('normal').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               }
@@ -471,7 +526,7 @@
             use: [
               /* config.module.rule('scss').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -479,7 +534,7 @@
               },
               /* config.module.rule('scss').oneOf('vue-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -490,17 +545,22 @@
               },
               /* config.module.rule('scss').oneOf('vue-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
               /* config.module.rule('scss').oneOf('vue-modules').use('sass-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\sass-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\sass-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   implementation: {
@@ -560,7 +620,7 @@
             use: [
               /* config.module.rule('scss').oneOf('vue').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -568,7 +628,7 @@
               },
               /* config.module.rule('scss').oneOf('vue').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -576,17 +636,22 @@
               },
               /* config.module.rule('scss').oneOf('vue').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
               /* config.module.rule('scss').oneOf('vue').use('sass-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\sass-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\sass-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   implementation: {
@@ -646,7 +711,7 @@
             use: [
               /* config.module.rule('scss').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -654,7 +719,7 @@
               },
               /* config.module.rule('scss').oneOf('normal-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -665,17 +730,22 @@
               },
               /* config.module.rule('scss').oneOf('normal-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
               /* config.module.rule('scss').oneOf('normal-modules').use('sass-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\sass-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\sass-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   implementation: {
@@ -734,7 +804,7 @@
             use: [
               /* config.module.rule('scss').oneOf('normal').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -742,7 +812,7 @@
               },
               /* config.module.rule('scss').oneOf('normal').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -750,17 +820,22 @@
               },
               /* config.module.rule('scss').oneOf('normal').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
               /* config.module.rule('scss').oneOf('normal').use('sass-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\sass-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\sass-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   implementation: {
@@ -826,7 +901,7 @@
             use: [
               /* config.module.rule('sass').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -834,7 +909,7 @@
               },
               /* config.module.rule('sass').oneOf('vue-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -845,17 +920,22 @@
               },
               /* config.module.rule('sass').oneOf('vue-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
               /* config.module.rule('sass').oneOf('vue-modules').use('sass-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\sass-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\sass-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   implementation: {
@@ -918,7 +998,7 @@
             use: [
               /* config.module.rule('sass').oneOf('vue').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -926,7 +1006,7 @@
               },
               /* config.module.rule('sass').oneOf('vue').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -934,17 +1014,22 @@
               },
               /* config.module.rule('sass').oneOf('vue').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
               /* config.module.rule('sass').oneOf('vue').use('sass-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\sass-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\sass-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   implementation: {
@@ -1007,7 +1092,7 @@
             use: [
               /* config.module.rule('sass').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1015,7 +1100,7 @@
               },
               /* config.module.rule('sass').oneOf('normal-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -1026,17 +1111,22 @@
               },
               /* config.module.rule('sass').oneOf('normal-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
               /* config.module.rule('sass').oneOf('normal-modules').use('sass-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\sass-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\sass-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   implementation: {
@@ -1098,7 +1188,7 @@
             use: [
               /* config.module.rule('sass').oneOf('normal').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1106,7 +1196,7 @@
               },
               /* config.module.rule('sass').oneOf('normal').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -1114,17 +1204,22 @@
               },
               /* config.module.rule('sass').oneOf('normal').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
               /* config.module.rule('sass').oneOf('normal').use('sass-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\sass-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\sass-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   implementation: {
@@ -1193,7 +1288,7 @@
             use: [
               /* config.module.rule('less').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1201,7 +1296,7 @@
               },
               /* config.module.rule('less').oneOf('vue-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -1212,11 +1307,16 @@
               },
               /* config.module.rule('less').oneOf('vue-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
@@ -1235,7 +1335,7 @@
             use: [
               /* config.module.rule('less').oneOf('vue').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1243,7 +1343,7 @@
               },
               /* config.module.rule('less').oneOf('vue').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -1251,11 +1351,16 @@
               },
               /* config.module.rule('less').oneOf('vue').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
@@ -1274,7 +1379,7 @@
             use: [
               /* config.module.rule('less').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1282,7 +1387,7 @@
               },
               /* config.module.rule('less').oneOf('normal-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -1293,11 +1398,16 @@
               },
               /* config.module.rule('less').oneOf('normal-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
@@ -1315,7 +1425,7 @@
             use: [
               /* config.module.rule('less').oneOf('normal').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1323,7 +1433,7 @@
               },
               /* config.module.rule('less').oneOf('normal').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -1331,11 +1441,16 @@
               },
               /* config.module.rule('less').oneOf('normal').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
@@ -1360,7 +1475,7 @@
             use: [
               /* config.module.rule('stylus').oneOf('vue-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1368,7 +1483,7 @@
               },
               /* config.module.rule('stylus').oneOf('vue-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -1379,11 +1494,16 @@
               },
               /* config.module.rule('stylus').oneOf('vue-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
@@ -1403,7 +1523,7 @@
             use: [
               /* config.module.rule('stylus').oneOf('vue').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1411,7 +1531,7 @@
               },
               /* config.module.rule('stylus').oneOf('vue').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -1419,11 +1539,16 @@
               },
               /* config.module.rule('stylus').oneOf('vue').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
@@ -1443,7 +1568,7 @@
             use: [
               /* config.module.rule('stylus').oneOf('normal-modules').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1451,7 +1576,7 @@
               },
               /* config.module.rule('stylus').oneOf('normal-modules').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2,
@@ -1462,11 +1587,16 @@
               },
               /* config.module.rule('stylus').oneOf('normal-modules').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
@@ -1485,7 +1615,7 @@
             use: [
               /* config.module.rule('stylus').oneOf('normal').use('vue-style-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\vue-style-loader\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\vue-style-loader\\index.js',
                 options: {
                   sourceMap: false,
                   shadowMode: false
@@ -1493,7 +1623,7 @@
               },
               /* config.module.rule('stylus').oneOf('normal').use('css-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\css-loader\\dist\\cjs.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\css-loader\\dist\\cjs.js',
                 options: {
                   sourceMap: false,
                   importLoaders: 2
@@ -1501,11 +1631,16 @@
               },
               /* config.module.rule('stylus').oneOf('normal').use('postcss-loader') */
               {
-                loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\postcss-loader\\src\\index.js',
+                loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\postcss-loader\\src\\index.js',
                 options: {
                   sourceMap: false,
                   plugins: [
-                    function () { /* omitted long function */ }
+                    function creator() {
+                      var transformer = initializer.apply(void 0, arguments);
+                      transformer.postcssPlugin = name;
+                      transformer.postcssVersion = new _processor.default().version;
+                      return transformer;
+                    }
                   ]
                 }
               },
@@ -1525,20 +1660,44 @@
       {
         test: /\.m?jsx?$/,
         exclude: [
-          function () { /* omitted long function */ }
+          filepath => {
+                      // always transpile js in vue files
+                      if (/\.vue\.jsx?$/.test(filepath)) {
+                        return false
+                      }
+                      // exclude dynamic entries from cli-service
+                      if (filepath.startsWith(cliServicePath)) {
+                        return true
+                      }
+          
+                      // only include @babel/runtime when the @vue/babel-preset-app preset is used
+                      if (
+                        process.env.VUE_CLI_TRANSPILE_BABEL_RUNTIME &&
+                        filepath.includes(path.join('@babel', 'runtime'))
+                      ) {
+                        return false
+                      }
+          
+                      // check if this is something the user explicitly wants to transpile
+                      if (transpileDepRegex && transpileDepRegex.test(filepath)) {
+                        return false
+                      }
+                      // Don't transpile node_modules
+                      return /node_modules/.test(filepath)
+                    }
         ],
         use: [
           /* config.module.rule('js').use('cache-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\cache-loader\\dist\\cjs.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\cache-loader\\dist\\cjs.js',
             options: {
-              cacheDirectory: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\.cache\\babel-loader',
-              cacheIdentifier: 'ee041efc'
+              cacheDirectory: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\.cache\\babel-loader',
+              cacheIdentifier: '8c7ebf02'
             }
           },
           /* config.module.rule('js').use('babel-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\babel-loader\\lib\\index.js'
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\babel-loader\\lib\\index.js'
           }
         ]
       },
@@ -1548,12 +1707,12 @@
         test: /\.(vue|(j|t)sx?)$/,
         exclude: [
           /node_modules/,
-          'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\@vue\\cli-service\\lib'
+          'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\@vue\\cli-service\\lib'
         ],
         use: [
           /* config.module.rule('eslint').use('eslint-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\eslint-loader\\index.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\eslint-loader\\index.js',
             options: {
               extensions: [
                 '.js',
@@ -1563,10 +1722,10 @@
                 '.tsx'
               ],
               cache: true,
-              cacheIdentifier: '85e8717c',
+              cacheIdentifier: '3e70278a',
               emitWarning: false,
               emitError: false,
-              eslintPath: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\eslint',
+              eslintPath: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\eslint',
               formatter: undefined
             }
           }
@@ -1578,19 +1737,19 @@
         use: [
           /* config.module.rule('ts').use('cache-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\cache-loader\\dist\\cjs.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\cache-loader\\dist\\cjs.js',
             options: {
-              cacheDirectory: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\.cache\\ts-loader',
-              cacheIdentifier: '7d2982ea'
+              cacheDirectory: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\.cache\\ts-loader',
+              cacheIdentifier: '07460ecc'
             }
           },
           /* config.module.rule('ts').use('babel-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\babel-loader\\lib\\index.js'
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\babel-loader\\lib\\index.js'
           },
           /* config.module.rule('ts').use('ts-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\ts-loader\\index.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\ts-loader\\index.js',
             options: {
               transpileOnly: true,
               appendTsSuffixTo: [
@@ -1607,19 +1766,19 @@
         use: [
           /* config.module.rule('tsx').use('cache-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\cache-loader\\dist\\cjs.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\cache-loader\\dist\\cjs.js',
             options: {
-              cacheDirectory: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\.cache\\ts-loader',
-              cacheIdentifier: '7d2982ea'
+              cacheDirectory: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\.cache\\ts-loader',
+              cacheIdentifier: '07460ecc'
             }
           },
           /* config.module.rule('tsx').use('babel-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\babel-loader\\lib\\index.js'
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\babel-loader\\lib\\index.js'
           },
           /* config.module.rule('tsx').use('ts-loader') */
           {
-            loader: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\node_modules\\ts-loader\\index.js',
+            loader: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\node_modules\\ts-loader\\index.js',
             options: {
               transpileOnly: true,
               happyPackMode: false,
@@ -1637,7 +1796,7 @@
       cacheGroups: {
         vendors: {
           name: 'chunk-vendors',
-          test: /[\\\/]node_modules[\\\/]/,
+          test: /[\\/]node_modules[\\/]/,
           priority: -10,
           chunks: 'initial'
         },
@@ -1717,10 +1876,41 @@
     new FriendlyErrorsWebpackPlugin(
       {
         additionalTransformers: [
-          function () { /* omitted long function */ }
+          error => {
+            if (error.webpackError) {
+              const message = typeof error.webpackError === 'string'
+                ? error.webpackError
+                : error.webpackError.message || ''
+              for (const { re, msg, type } of rules) {
+                const match = message.match(re)
+                if (match) {
+                  return Object.assign({}, error, {
+                    // type is necessary to avoid being printed as default error
+                    // by friendly-error-webpack-plugin
+                    type,
+                    shortMessage: msg(error, match)
+                  })
+                }
+              }
+              // no match, unknown webpack error without a message.
+              // friendly-error-webpack-plugin fails to handle this.
+              if (!error.message) {
+                return Object.assign({}, error, {
+                  type: 'unknown-webpack-error',
+                  shortMessage: message
+                })
+              }
+            }
+            return error
+          }
         ],
         additionalFormatters: [
-          function () { /* omitted long function */ }
+          errors => {
+            errors = errors.filter(e => e.shortMessage)
+            if (errors.length) {
+              return errors.map(e => e.shortMessage)
+            }
+          }
         ]
       }
     ),
@@ -1728,8 +1918,23 @@
     new HtmlWebpackPlugin(
       {
         title: 'hello-vue3',
-        templateParameters: function () { /* omitted long function */ },
-        template: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\public\\index.html'
+        templateParameters: (compilation, assets, pluginOptions) => {
+          // enhance html-webpack-plugin's built in template params
+          let stats
+          return Object.assign({
+            // make stats lazy as it is expensive
+            get webpack () {
+              return stats || (stats = compilation.getStats().toJson())
+            },
+            compilation: compilation,
+            webpackConfig: compilation.options,
+            htmlWebpackPlugin: {
+              files: assets,
+              options: pluginOptions
+            }
+          }, resolveClientEnv(options, true /* raw */))
+        },
+        template: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\public\\index.html'
       }
     ),
     /* config.plugin('pwa') */
@@ -1760,8 +1965,8 @@
     new CopyPlugin(
       [
         {
-          from: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\public',
-          to: 'C:\\Users\\W540\\Desktop\\new\\hello-vue3\\dist',
+          from: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\public',
+          to: 'C:\\Users\\Reinis\\Desktop\\code\\snake-game-vue3-composition-api\\dist',
           toType: 'dir',
           ignore: [
             '.DS_Store',
